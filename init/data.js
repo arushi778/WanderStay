@@ -341,7 +341,7 @@ const sampleListings = [
         "Escape to a secluded beach house on the Pacific coast of Costa Rica. Surf, relax, and unwind.",
       image: {
         filename: "listingimage",
-        url: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2glMjBob3VzZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+        url: "https://plus.unsplash.com/premium_photo-1682285210821-5d1b5a406b97?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
       price: 1800,
       location: "Costa Rica",
