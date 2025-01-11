@@ -37,10 +37,10 @@ const validateListing = (res,req,next)=>{
     let {error} = listingSchema.validate(req.body);
     if(error)
     {
-        let errMsg = error.details.map((el) => el.messgae.join(","));
-        throw new ExpressError(400,error);
+        let errMsg = error.details.map((el) => el.message.join(","));
+        throw new ExpressError(400,errMsg);
     }
-    elseW
+    else
     {
         next();
     }
@@ -64,6 +64,7 @@ const validateListing = (res,req,next)=>{
 app.get("/listings",wrapAsync(async(req,res)=>{
 
     const allListings = await Listing.find({});
+    console.log(allListings);
     res.render("listings/index.ejs",{allListings});
 }));
 
