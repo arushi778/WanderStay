@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Review = require("./review");
 
 const Schema = mongoose.Schema;
 
@@ -14,7 +15,7 @@ const listingSchema = new Schema({
     image: {
         filename: { type: String},
         url: { type: String, 
-            set : (v) => v === ""?"https://images.pexels.com/photos/12314825/pexels-photo-12314825.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1": v,
+            set : (v) => !v || v === ""?"https://images.pexels.com/photos/12314825/pexels-photo-12314825.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1": v,
  
         }
     },
@@ -26,6 +27,19 @@ const listingSchema = new Schema({
     },
     country : {
         type: String
+    },
+    reviews : {
+        type : [{
+            type : Schema.Types.ObjectId,
+            ref : "Review"
+        }]
+    }
+});
+
+listingSchema.post("findOneAndDelete",async(listing)=>{
+
+    if(listing){
+        await Review.deleteMany({_id : {$in : listing.reviews}});
     }
 });
 
