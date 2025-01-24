@@ -110,6 +110,10 @@ body{
 {
     height:30vh;
 }
+.img-thumbnail {
+    width: 250px ; /* Set the desired width */
+    height: 150px !important; /* Set the desired height */
+}
 
 .btns
 {
