@@ -16,12 +16,26 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: "secret-code"
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error",()=>{
+    console.log("ERROR IN MONGO SESSION STORE");
+});
+
 const sessionOptions = {
+    store,
     secret : "secret-code", 
     resave:false,
     saveUninitialized : true,
