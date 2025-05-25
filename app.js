@@ -22,10 +22,12 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+const dbUrl = process.env.ATLASDB_URL;
+
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: {
-        secret: "secret-code"
+        secret: process.env.SECRET,
     },
     touchAfter: 24 * 3600,
 });
@@ -36,7 +38,7 @@ store.on("error",()=>{
 
 const sessionOptions = {
     store,
-    secret : "secret-code", 
+    secret : process.env.SECRET, 
     resave:false,
     saveUninitialized : true,
     cookie : {
@@ -46,7 +48,7 @@ const sessionOptions = {
     }
 };
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/WanderStay";
+//const MONGO_URL = "mongodb://127.0.0.1:27017/WanderStay";
 main()
      .then((res)=>{
     console.log("Connected to DB");
@@ -56,7 +58,7 @@ main()
     });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 app.set("view engine","ejs");
